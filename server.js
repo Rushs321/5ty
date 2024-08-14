@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 'use strict';
-const app = require('express')();
-const authenticate = require('./src/authenticate');
-const params = require('./src/params');
-const proxy = require('./src/proxy');
+const expressApp = require('express')();
+const authMiddleware = require('./src/authenticate');
+const paramParser = require('./src/params');
+const proxyRequest = require('./src/proxy');
+const serverPort = process.env.PORT || 8080;
 
-const PORT = process.env.PORT || 8080;
-
-app.enable('trust proxy');
-app.get('/', authenticate, params, proxy);
-app.get('/favicon.ico', (req, res) => res.status(204).end());
-app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+expressApp.enable('trust proxy');
+expressApp.get('/', authMiddleware, paramParser, proxyRequest);
+expressApp.get('/favicon.ico', (req, res) => res.status(204).end());
+expressApp.listen(serverPort, () => console.log(`Listening on ${serverPort}`));
