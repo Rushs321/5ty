@@ -3,7 +3,7 @@ const qDefault = 40;
 function parseParams(req, res, next) {
     const { url, jpeg, bw, l } = req.query;
     if (!url) {
-        return res.end('bandwidth-hero-proxy');
+        return res.end('123');
     }
     const urlString = Array.isArray(url) ? url.join('&url=') : url;
     const sanitizedUrl = urlString.replace(/http:\/\/1\.1\.\d\.\d\/bmi\/(https?:\/\/)?/i, 'http://');
