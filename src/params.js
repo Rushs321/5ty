@@ -5,9 +5,7 @@ function parseParams(req, res, next) {
     if (!url) {
         return res.end('123');
     }
-    const urlString = Array.isArray(url) ? url.join('&url=') : url;
-    const sanitizedUrl = urlString.replace(/http:\/\/1\.1\.\d\.\d\/bmi\/(https?:\/\/)?/i, 'http://');
-    req.params.url = sanitizedUrl;
+    req.params.url = decodeURIComponent(url);
     req.params.webp = !jpeg;
     req.params.grayscale = bw !== '0';
     req.params.quality = parseInt(l, 10) || qDefault;
