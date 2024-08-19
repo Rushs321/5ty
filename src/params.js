@@ -3,7 +3,7 @@ const qDefault = 40;
 function parseParams(req, res, next) {
     const { url, jpeg, bw, l } = req.query;
     if (!url) {
-        return res.end('123');
+        return res.end('success');
     }
     req.params.url = decodeURIComponent(url);
     req.params.webp = !jpeg;
